@@ -1,0 +1,402 @@
+.visual-search {
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.visual-search-btn {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  i {
+    font-size: 16px;
+    color: #495057;
+  }
+
+  &:hover {
+    background: #f0f4ff;
+    border-color: #4f6ef7;
+    i { color: #4f6ef7; }
+  }
+}
+
+// Overlay
+.visual-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Modal
+.visual-search-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 92%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+// Header
+.vs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafbfc;
+  border-radius: 16px 16px 0 0;
+}
+
+.vs-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  h4 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+}
+
+.vs-header-icon {
+  font-size: 20px;
+  color: #4f6ef7;
+}
+
+.vs-header-sub {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.vs-close {
+  background: #f0f0f0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+  margin-top: 0;
+  padding: 0;
+
+  i { font-size: 14px; }
+
+  &:hover {
+    background: #e0e0e0;
+    color: #333;
+  }
+}
+
+// Body
+.vs-body {
+  padding: 24px;
+}
+
+// Upload
+.vs-upload-area {
+  margin-bottom: 20px;
+}
+
+.vs-upload-btn {
+  background: #fafbfc;
+  border: 2px dashed #d0d5dd;
+  border-radius: 12px;
+  padding: 28px 20px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s;
+  margin-top: 0;
+
+  &:hover {
+    border-color: #4f6ef7;
+    background: #f0f4ff;
+  }
+}
+
+.vs-upload-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+
+  i {
+    font-size: 20px;
+    color: #4f6ef7;
+  }
+}
+
+.vs-upload-text {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.vs-upload-hint {
+  display: block;
+  font-size: 12px;
+  color: #999;
+}
+
+// Preview
+.vs-preview {
+  text-align: center;
+  margin-bottom: 20px;
+
+  img {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+}
+
+.vs-preview-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+// Loading
+.vs-loading {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.vs-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f0f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+
+  i {
+    font-size: 22px;
+    color: #4f6ef7;
+  }
+}
+
+.vs-loading-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.vs-loading-hint {
+  font-size: 12px;
+  color: #999;
+}
+
+// Error
+.vs-error {
+  text-align: center;
+  padding: 14px;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+
+  i { margin-right: 6px; }
+}
+
+// No results
+.vs-no-results {
+  text-align: center;
+  padding: 30px 20px;
+
+  i {
+    font-size: 32px;
+    color: #ccc;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  span {
+    font-size: 13px;
+    color: #999;
+  }
+}
+
+// Results
+.vs-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+
+  h5 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+
+    i {
+      color: #22c55e;
+      margin-right: 6px;
+    }
+  }
+}
+
+.vs-results-sort {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+// List layout (instead of grid)
+.vs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vs-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #4f6ef7;
+    background: #fafbff;
+    box-shadow: 0 2px 12px rgba(79, 110, 247, 0.08);
+  }
+}
+
+.vs-item-rank {
+  font-size: 12px;
+  font-weight: 700;
+  color: #999;
+  min-width: 24px;
+  text-align: center;
+}
+
+.vs-item-image {
+  flex-shrink: 0;
+
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+}
+
+.vs-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.vs-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vs-item-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #16a34a;
+  margin: 0 0 2px;
+}
+
+.vs-item-brand {
+  font-size: 11px;
+  color: #888;
+}
+
+// Match badge
+.vs-item-match {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.vs-match-badge {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.vs-match-high {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.vs-match-medium {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.vs-match-low {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.vs-match-label {
+  display: block;
+  font-size: 10px;
+  color: #999;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
