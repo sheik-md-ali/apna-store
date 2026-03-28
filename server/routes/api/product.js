@@ -524,7 +524,7 @@ router.post('/visual-search', upload.single('image'), async (req, res) => {
           confidence: confidence
         };
       })
-      .filter(p => parseFloat(p.confidence) > 50)
+      .filter(p => parseFloat(p.confidence) > 55)
       .sort((a, b) => parseFloat(b.confidence) - parseFloat(a.confidence))
       .slice(0, 5);
 
