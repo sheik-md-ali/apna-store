@@ -62,7 +62,7 @@ const CartList = props => {
                   <p className='item-label'>price</p>
                 </Col>
                 <Col xs='3' className='text-right'>
-                  <p className='value price'>{` $${item?.totalPrice}`}</p>
+                  <p className='value price'>{` \u20B9${item?.totalPrice}`}</p>
                 </Col>
               </Row>
               <Row className='mb-2 align-items-center'>
