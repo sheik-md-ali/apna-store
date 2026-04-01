@@ -580,4 +580,55 @@ router.post('/index-image', auth, role.check(ROLES.Admin, ROLES.Merchant), uploa
   }
 });
 
+// Reindex all products in AI search (admin only)
+router.post('/reindex-all', auth, role.check(ROLES.Admin), async (req, res) => {
+  try {
+    // Reset AI index first to prevent duplicates
+    try {
+      await axios.post(`${AI_SEARCH_URL}/reset`, null, {
+        headers: { 'X-API-Key': AI_API_KEY, 'Authorization': `Bearer ${HF_TOKEN}` },
+        timeout: 10000
+      });
+    } catch (e) {}
+
+    const products = await Product.find({ imageUrl: { $exists: true, $ne: '' } });
+    let success = 0;
+    let failed = 0;
+
+    for (const p of products) {
+      try {
+        const imgResponse = await axios.get(p.imageUrl, { responseType: 'arraybuffer' });
+        const buffer = Buffer.from(imgResponse.data);
+
+        const formData = new FormData();
+        formData.append('image', buffer, { filename: p.name + '.jpg', contentType: 'image/jpeg' });
+        formData.append('product_id', p._id.toString());
+        formData.append('category', p.name);
+
+        await axios.post(`${AI_SEARCH_URL}/add-image`, formData, {
+          headers: {
+            ...formData.getHeaders(),
+            'X-API-Key': AI_API_KEY,
+            'Authorization': `Bearer ${HF_TOKEN}`
+          },
+          timeout: 30000
+        });
+        success++;
+      } catch (err) {
+        failed++;
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `Reindexed ${success} products (${failed} failed)`,
+      total: products.length,
+      indexed: success,
+      failed: failed
+    });
+  } catch (error) {
+    res.status(400).json({ error: 'Reindex failed. Please try again.' });
+  }
+});
+
 module.exports = router;
